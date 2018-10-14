@@ -29,5 +29,4 @@ public class ProductController {
         model.addAttribute("product", productService.productTypeStartingWith("vodka"));
         return "products";
     }
-
 }
