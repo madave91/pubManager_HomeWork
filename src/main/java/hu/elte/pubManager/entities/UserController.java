@@ -5,10 +5,14 @@
  */
 package hu.elte.pubManager.entities;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import hu.elte.pubManager.exceptions.UserNotFoundException;
 import java.net.URI;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,17 +37,20 @@ public class UserController {
     }
     
     @GetMapping("/users/{id}")
-    public User retriveUser(@PathVariable int id){
+    public Resource<User> retriveUser(@PathVariable int id){
         User user = service.findOne(id);
         if(user==null){
             throw new UserNotFoundException("id-"+id);
         }
-        return user;
+        Resource<User> resource = new Resource<User>(user);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retriveAllUsers());
+        resource.add(linkTo.withRel("all-users"));
+        return resource;
     }
     
     //ekkor a request body adja át a User-t
     @PostMapping("/users")
-    public ResponseEntity<Object> createUser(@RequestBody User user){
+    public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
         User savedUser =  service.save(user);
        
        //send back the created user
