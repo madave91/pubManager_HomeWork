@@ -5,6 +5,8 @@
  */
 package hu.elte.pubManager.entities;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -13,13 +15,16 @@ import javax.validation.constraints.Size;
  *
  * @author madave91
  */
+@ApiModel(description="User details")
 public class User {
     private Integer id;
    
     @Size(min=2, message="Name Should have at least 2 character long!")
+    @ApiModelProperty(notes="Name Should have at least 2 character long!")
     private String name;
     
     @Past
+    @ApiModelProperty(notes="Birth date should be in the past")
     private Date birthDate;
 
     protected User(){
