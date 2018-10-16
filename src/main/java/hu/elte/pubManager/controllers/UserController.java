@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.pubManager.entities;
+package hu.elte.pubManager.controllers;
 
+import hu.elte.pubManager.entities.User;
+import hu.elte.pubManager.entities.UserDaoService;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import hu.elte.pubManager.exceptions.UserNotFoundException;
 import java.net.URI;
