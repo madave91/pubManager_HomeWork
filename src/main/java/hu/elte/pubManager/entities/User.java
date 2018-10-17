@@ -8,6 +8,9 @@ package hu.elte.pubManager.entities;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -15,9 +18,12 @@ import javax.validation.constraints.Size;
  *
  * @author madave91
  */
+@Entity
 @ApiModel(description="User details")
 public class User {
-    private Integer id;
+    @Id
+    @GeneratedValue
+    private Long id;
    
     @Size(min=2, message="Name Should have at least 2 character long!")
     @ApiModelProperty(notes="Name Should have at least 2 character long!")
@@ -30,9 +36,8 @@ public class User {
     protected User(){
         
     }
-    public User(int id, String name, Date birthDate) {
+    public User(String name, Date birthDate) {
         super();
-        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
     }
@@ -40,7 +45,7 @@ public class User {
     
     
 //GETTERS
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -54,7 +59,7 @@ public class User {
     
 //SETTERS
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

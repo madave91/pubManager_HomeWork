@@ -6,7 +6,7 @@
 package hu.elte.pubManager.controllers;
 
 import hu.elte.pubManager.entities.User;
-import hu.elte.pubManager.entities.UserDaoService;
+import hu.elte.pubManager.services.UserDaoService;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import hu.elte.pubManager.exceptions.UserNotFoundException;
 import java.net.URI;
@@ -33,7 +33,7 @@ public class UserController {
     @Autowired
     private UserDaoService service;
     
-    @GetMapping("/users")
+   /* @GetMapping("/users")
     public List<User> retriveAllUsers(){
         return service.findAll();
     }
@@ -70,6 +70,6 @@ public class UserController {
         if(user==null){
             throw new UserNotFoundException("id-"+id);
         }
-    }
+    }*/
         
 }

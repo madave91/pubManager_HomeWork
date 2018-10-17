@@ -15,8 +15,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "products")
 public class Products {
     @Id
@@ -41,15 +39,14 @@ public class Products {
     
     @Column(name="product_details", nullable=false, length=255)
     private String details;
-    
-    
-}
-    /*public Product(){
-        super();
-    }
 
-    public Product(int id, String name, int price, float defaultQuantity, float actualQuantity, String type, String details) {
-        this.id = id;
+    /*protected Products(){
+    
+    }
+    */
+    
+    public Products(String name, int price, float defaultQuantity, float actualQuantity, String type, String details) {
+        super();
         this.name = name;
         this.price = price;
         this.defaultQuantity = defaultQuantity;
@@ -59,7 +56,7 @@ public class Products {
     }
 
 //GETTERS
-    public int getId() {
+    public Long getId() {
         return id;
     }
     
@@ -89,7 +86,7 @@ public class Products {
 
 //SETTERS
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -123,4 +120,3 @@ public class Products {
                                         id, name, price, defaultQuantity, actualQuantity, type, details);
     }
 }
-*/    
