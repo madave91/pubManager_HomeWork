@@ -5,7 +5,7 @@
  */
 package hu.elte.pubManager.repositories;
 
-import hu.elte.pubManager.entities.User;
+import hu.elte.pubManager.entities.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author madave91
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends JpaRepository<Users, Integer>{
     
 }

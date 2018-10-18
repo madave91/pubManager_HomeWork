@@ -8,6 +8,7 @@ package hu.elte.pubManager.entities;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,27 +21,43 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @ApiModel(description="User details")
-public class User {
+public class Users {
     @Id
+    @Column(name = "user_id", updatable = false, nullable = false)
     @GeneratedValue
     private Integer id;
    
+    @Column(name="user_fname", nullable=false, length=255)
     @Size(min=2, message="Name Should have at least 2 character long!")
     @ApiModelProperty(notes="Name Should have at least 2 character long!")
-    private String name;
+    private String fName;
     
-    @Past
+    @Column(name="user_lname", nullable=false, length=255)
+    @Size(min=2, message="Name Should have at least 2 character long!")
+    @ApiModelProperty(notes="Name Should have at least 2 character long!")
+    private String lName;
+    
+    @Column(name="user_login_name", nullable=false, length=255)
+    @Size(min=2, message="Name Should have at least 2 character long!")
+    @ApiModelProperty(notes="Name Should have at least 2 character long!")
+    private String loginName;
+    
+    //@Past
+    @Column(name="birth_date", nullable=false, length=11)
     @ApiModelProperty(notes="Birth date should be in the past")
     private Date birthDate;
 
-    protected User(){
+    protected Users(){
         
     }
-    public User(String name, Date birthDate) {
-        super();
-        this.name = name;
+
+    public Users(String fName, String lName, String loginName, Date birthDate) {
+        this.fName = fName;
+        this.lName = lName;
+        this.loginName = loginName;
         this.birthDate = birthDate;
     }
+   
     
     
     
@@ -49,9 +66,19 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getfName() {
+        return fName;
     }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+   
 
     public Date getBirthDate() {
         return birthDate;
@@ -63,8 +90,16 @@ public class User {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 
     public void setBirthDate(Date birthDate) {

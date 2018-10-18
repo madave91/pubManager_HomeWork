@@ -5,8 +5,7 @@
  */
 package hu.elte.pubManager.controllers;
 
-import hu.elte.pubManager.entities.User;
-import hu.elte.pubManager.services.UserDaoService;
+import hu.elte.pubManager.entities.Users;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import hu.elte.pubManager.exceptions.UserNotFoundException;
 import hu.elte.pubManager.repositories.UserRepository;
@@ -32,24 +31,22 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  */
 @RestController
 public class UserController {
-    @Autowired
-    private UserDaoService service;
     
     @Autowired
     private UserRepository userRepository;
     
     @GetMapping("/users")
-    public List<User> retriveAllUsers(){
+    public List<Users> retriveAllUsers(){
         return userRepository.findAll();
     }
     
     @GetMapping("/users/{id}")
-    public Resource<User> retriveUser(@PathVariable int id){
-        Optional<User> user = userRepository.findById(id);
+    public Resource<Users> retriveUser(@PathVariable int id){
+        Optional<Users> user = userRepository.findById(id);
         if(!user.isPresent()){
             throw new UserNotFoundException("id-"+id);
         }
-        Resource<User> resource = new Resource<>(user.get());
+        Resource<Users> resource = new Resource<>(user.get());
         ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retriveAllUsers());
         resource.add(linkTo.withRel("all-users"));
         return resource;
@@ -57,8 +54,8 @@ public class UserController {
     
     //ekkor a request body adja át a User-t
     @PostMapping("/users")
-    public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
-        User savedUser =  userRepository.save(user);
+    public ResponseEntity<Object> createUser(@Valid @RequestBody Users user){
+        Users savedUser =  userRepository.save(user);
        
        //send back the created user
         URI location = ServletUriComponentsBuilder

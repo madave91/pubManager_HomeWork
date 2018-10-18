@@ -20,7 +20,7 @@ public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id", updatable = false, nullable = false)
-    private Long id;
+    private Integer id;
     
     @Column(name="product_name", nullable=false, length=255)
     private String name;
@@ -56,7 +56,7 @@ public class Products {
     }
 
 //GETTERS
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     
@@ -86,7 +86,7 @@ public class Products {
 
 //SETTERS
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
