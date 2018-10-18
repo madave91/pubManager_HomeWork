@@ -23,7 +23,7 @@ import javax.validation.constraints.Size;
 public class User {
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
    
     @Size(min=2, message="Name Should have at least 2 character long!")
     @ApiModelProperty(notes="Name Should have at least 2 character long!")
@@ -45,7 +45,7 @@ public class User {
     
     
 //GETTERS
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -59,7 +59,7 @@ public class User {
     
 //SETTERS
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

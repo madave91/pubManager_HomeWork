@@ -33,3 +33,7 @@ insert into products (product_id, product_name, product_price, product_default_q
 insert into products (product_id, product_name, product_price, product_default_quantity, product_actual_quantity, product_type, product_details) values (23, 'Johnnie Walker Red Label', 550, 1.4, 1.4, 'shot','whiksy');
 insert into products (product_id, product_name, product_price, product_default_quantity, product_actual_quantity, product_type, product_details) values (24, 'Johnnie Walker Black Label', 700, 1.4, 1.4, 'shot','whiksy');
 insert into products (product_id, product_name, product_price, product_default_quantity, product_actual_quantity, product_type, product_details) values (25, 'Johnnie Walker Black Label', 700, 1.4, 1.4, 'shot','whiksy');
+
+insert into users (user_id, user_fname, user_lname, user_login_name, birth_date) values(1, 'David', 'Madacsi', 'madave91', sysdate());
+insert into users (user_id, user_fname, user_lname, user_login_name, birth_date) values(2, 'Ders', 'Horvath', 'ders', sysdate());
+insert into users (user_id, user_fname, user_lname, user_login_name, birth_date) values(3, 'Domonkos', 'Nemeth', 'minkos', sysdate());

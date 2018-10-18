@@ -9,8 +9,10 @@ import hu.elte.pubManager.entities.User;
 import hu.elte.pubManager.services.UserDaoService;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import hu.elte.pubManager.exceptions.UserNotFoundException;
+import hu.elte.pubManager.repositories.UserRepository;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -33,18 +35,21 @@ public class UserController {
     @Autowired
     private UserDaoService service;
     
-   /* @GetMapping("/users")
+    @Autowired
+    private UserRepository userRepository;
+    
+    @GetMapping("/users")
     public List<User> retriveAllUsers(){
-        return service.findAll();
+        return userRepository.findAll();
     }
     
     @GetMapping("/users/{id}")
     public Resource<User> retriveUser(@PathVariable int id){
-        User user = service.findOne(id);
-        if(user==null){
+        Optional<User> user = userRepository.findById(id);
+        if(!user.isPresent()){
             throw new UserNotFoundException("id-"+id);
         }
-        Resource<User> resource = new Resource<User>(user);
+        Resource<User> resource = new Resource<>(user.get());
         ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retriveAllUsers());
         resource.add(linkTo.withRel("all-users"));
         return resource;
@@ -53,7 +58,7 @@ public class UserController {
     //ekkor a request body adja át a User-t
     @PostMapping("/users")
     public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
-        User savedUser =  service.save(user);
+        User savedUser =  userRepository.save(user);
        
        //send back the created user
         URI location = ServletUriComponentsBuilder
@@ -66,10 +71,7 @@ public class UserController {
     
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable int id){
-        User user = service.deleteById(id);
-        if(user==null){
-            throw new UserNotFoundException("id-"+id);
-        }
-    }*/
+        userRepository.deleteById(id);
+    }
         
 }
