@@ -9,6 +9,7 @@ import hu.elte.pubManager.entities.Users;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import hu.elte.pubManager.exceptions.UserNotFoundException;
 import hu.elte.pubManager.repositories.UserRepository;
+import io.swagger.annotations.ApiModelProperty;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -35,11 +36,14 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
     
+//GETTERS
+    @ApiModelProperty(notes="Get All User")
     @GetMapping("/users")
     public List<Users> retriveAllUsers(){
         return userRepository.findAll();
     }
     
+    @ApiModelProperty(notes="Get User By ID")
     @GetMapping("/users/{id}")
     public Resource<Users> retriveUser(@PathVariable int id){
         Optional<Users> user = userRepository.findById(id);
@@ -52,7 +56,9 @@ public class UserController {
         return resource;
     }
     
-    //ekkor a request body adja át a User-t
+    
+//POSTERS
+    @ApiModelProperty(notes="Create User")
     @PostMapping("/users")
     public ResponseEntity<Object> createUser(@Valid @RequestBody Users user){
         Users savedUser =  userRepository.save(user);
@@ -66,6 +72,7 @@ public class UserController {
         return ResponseEntity.created(location).build();
     }
     
+    @ApiModelProperty(notes="Delete User By ID")
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable int id){
         userRepository.deleteById(id);

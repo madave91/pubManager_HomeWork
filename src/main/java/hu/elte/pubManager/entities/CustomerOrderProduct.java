@@ -5,6 +5,7 @@
  */
 package hu.elte.pubManager.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -25,12 +27,16 @@ public class CustomerOrderProduct {
     private Long id;
     
     @ManyToOne(fetch=FetchType.LAZY)
+    @JsonIgnore
     private CustomerOrder customerOrder;
+    
+    @OneToOne
+    private Products product;
     private int quantity;
     private String comment;
 
     
-    
+    //GETTERS
     
     public Long getId() {
         return id;
@@ -40,7 +46,9 @@ public class CustomerOrderProduct {
         return customerOrder;
     }
 
-    
+    public Products getProduct() {
+        return product;
+    }
 
     public int getQuantity() {
         return quantity;
@@ -50,7 +58,7 @@ public class CustomerOrderProduct {
         return comment;
     }
 
-    
+    //SETTERS
 
     public void setId(Long id) {
         this.id = id;
@@ -58,6 +66,10 @@ public class CustomerOrderProduct {
 
     public void setCustomerOrder(CustomerOrder customerOrder) {
         this.customerOrder = customerOrder;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
     }
 
     public void setQuantity(int quantity) {

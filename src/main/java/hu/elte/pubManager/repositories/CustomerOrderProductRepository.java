@@ -5,7 +5,7 @@
  */
 package hu.elte.pubManager.repositories;
 
-import hu.elte.pubManager.entities.Products;
+import hu.elte.pubManager.entities.CustomerOrderProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,5 +14,5 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author madave91
  */
 @ResponseBody
-public interface ProductRepository extends JpaRepository<Products, Integer>{
+public interface CustomerOrderProductRepository extends JpaRepository<CustomerOrderProduct, Integer>{
 }
