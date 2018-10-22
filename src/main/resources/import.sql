@@ -38,8 +38,8 @@ insert into users (user_id, user_fname, user_lname, user_login_name, birth_date)
 insert into users (user_id, user_fname, user_lname, user_login_name, birth_date) values(2001, 'Ders', 'Horvath', 'ders', sysdate());
 insert into users (user_id, user_fname, user_lname, user_login_name, birth_date) values(3001, 'Domonkos', 'Nemeth', 'minkos', sysdate());
 
-insert into customer_order(order_id, order_date, paid, price) values (1001, sysdate(), false, 14990)
-insert into customer_order(order_id, order_date, paid, price) values (1002, sysdate(), true, 7990)
+insert into customer_order(order_id, order_date, paid, price) values (1001, sysdate(), false, 0)
+insert into customer_order(order_id, order_date, paid, price) values (1002, sysdate(), true, 0)
 
-insert into customer_order_product(order_id, comment, quantity, customer_order_order_id, product_product_id) values (001, 'citrommal', 3, 1001, 18)
-insert into customer_order_product(order_id, comment, quantity, customer_order_order_id, product_product_id) values (002, '', 3, 1001, 15)
+insert into customer_order_product(comment, quantity, customer_order_order_id, product_product_id) values (6'citrommal', 3, 1001, 18)
+insert into customer_order_product(comment, quantity, customer_order_order_id, product_product_id) values ('', 3, 1001, 15)

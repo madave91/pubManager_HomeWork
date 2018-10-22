@@ -7,9 +7,11 @@ package hu.elte.pubManager.controllers;
 
 import hu.elte.pubManager.entities.CustomerOrder;
 import hu.elte.pubManager.entities.CustomerOrderProduct;
-import hu.elte.pubManager.entities.Users;
+import hu.elte.pubManager.entities.Products;
 import hu.elte.pubManager.exceptions.UserNotFoundException;
+import hu.elte.pubManager.repositories.CustomerOrderProductRepository;
 import hu.elte.pubManager.repositories.CustomerOrderRepository;
+import hu.elte.pubManager.repositories.ProductRepository;
 import io.swagger.annotations.ApiModelProperty;
 import java.net.URI;
 import java.util.List;
@@ -38,6 +40,11 @@ public class CustomerOrderController {
     @Autowired
     private CustomerOrderRepository customerOrderRepository;
     
+    @Autowired
+    private CustomerOrderProductRepository customerOrderProductRepository;
+    
+    @Autowired
+    private ProductRepository productRepository;
 //GETTERS
     @ApiModelProperty(notes="Get the Orders")
     @GetMapping("/orders")
@@ -57,7 +64,7 @@ public class CustomerOrderController {
         resource.add(linkTo.withRel("all-orders"));
         return resource;
     }
-    //GET THE ORDERS DETAILS
+  //GET THE ORDERS DETAILS
     @ApiModelProperty(notes="Get Order Details By ID")
     @GetMapping("/orders/{id}/details")
     public List<CustomerOrderProduct> retriveDetails(@PathVariable int id){
@@ -82,6 +89,36 @@ public class CustomerOrderController {
                .toUri();
         return ResponseEntity.created(location).build();
     }
+  //POST THE ORDER DETAILS
+    @PostMapping("/orders/{id}/details")
+    public ResponseEntity<Object> createDetails(@PathVariable Integer id, @RequestBody CustomerOrderProduct customerOrderProduct){
+        Optional<CustomerOrder> orderOptional = customerOrderRepository.findById(id);
+        if(!orderOptional.isPresent()){
+            throw new UserNotFoundException("id-" + id);
+        }
+        CustomerOrder order = orderOptional.get();      
+        customerOrderProduct.setCustomerOrder(order);
+        
+        //get the product
+        Optional<Products> productOptional = productRepository.findById(customerOrderProduct.getId());
+        if(!productOptional.isPresent()){
+            throw new UserNotFoundException("id-" + customerOrderProduct.getId());
+        }
+        
+        Products product = productOptional.get();
+        customerOrderProduct.setProducts(product);
+        order.calculatePrice(customerOrderProduct.getQuantity(), product.getPrice());
+        
+        customerOrderProductRepository.save(customerOrderProduct);
+        
+        URI location = ServletUriComponentsBuilder
+               .fromCurrentRequest()
+               .path("/{id}")
+               .buildAndExpand(customerOrderProduct.getId())
+               .toUri();
+        return ResponseEntity.created(location).build();
+    }
+    
     
     @ApiModelProperty(notes="Delete Order By ID")
     @DeleteMapping("/orders/{id}")

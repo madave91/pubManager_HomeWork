@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 package hu.elte.pubManager.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
 import javax.persistence.*;
 import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 /**
  *
  * @author madave91
@@ -17,13 +17,24 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "products")
 public class Products {
+
+    static ArrayList<Products> allProduct = new ArrayList<>();
+    public static Products getProductByName(String productName) {
+        for(int i=0; i<allProduct.size(); i++){
+            Products actual = allProduct.get(i);
+            if(actual.getName().equals(productName)){
+                return actual;
+            }
+        }
+        return null;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id", updatable = false, nullable = false)
     private Integer id;
     
     @Column(name="product_name", nullable=false, length=255)
-    private String name;
+    private String productName;
     
     @Column(name="product_price", nullable=false, length=10)
     private int price;
@@ -40,14 +51,19 @@ public class Products {
     @Column(name="product_details", nullable=false, length=255)
     private String details;
 
-    /*protected Products(){
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customerOrderProduct_id")
+    @JsonIgnore
+    private CustomerOrderProduct customerOrderProduct;
+    
+    protected Products(){
     
     }
-    */
     
     public Products(String name, int price, float defaultQuantity, float actualQuantity, String type, String details) {
         super();
-        this.name = name;
+        this.productName = name;
         this.price = price;
         this.defaultQuantity = defaultQuantity;
         this.actualQuantity = actualQuantity;
@@ -61,7 +77,7 @@ public class Products {
     }
     
     public String getName() {
-        return name;
+        return productName;
     }
 
     public int getPrice() {
@@ -83,7 +99,7 @@ public class Products {
     public String getDetails() {
         return details;
     }
-
+    
 //SETTERS
 
     public void setId(Integer id) {
@@ -91,7 +107,7 @@ public class Products {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.productName = name;
     }
 
     public void setPrice(int price) {
@@ -117,6 +133,6 @@ public class Products {
     @Override
     public String toString(){
         return String.format("Product: [id: %s, name: %s, price: %s, d_quantity: %s, a_quantity: %s, type: %s, details: %s]",
-                                        id, name, price, defaultQuantity, actualQuantity, type, details);
+                                        id, productName, price, defaultQuantity, actualQuantity, type, details);
     }
 }

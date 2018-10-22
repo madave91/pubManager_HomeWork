@@ -66,7 +66,7 @@ public class CustomerOrder {
     public int getPrice() {
         return price;
     }
-
+    
     public Date getOrderDate() {
         return orderDate;
     }
@@ -96,7 +96,10 @@ public class CustomerOrder {
     }
     
     
-    
+        
+    public void calculatePrice(int multiplier, int price){
+        this.price += (multiplier*price);
+    }
     
     
 }
