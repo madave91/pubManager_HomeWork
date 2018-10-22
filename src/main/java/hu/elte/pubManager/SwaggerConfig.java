@@ -18,6 +18,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.ArrayList;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
@@ -39,7 +40,6 @@ public class SwaggerConfig {
                     "http://www.apache.org/licenses/LICENSE-2.0", 
                     collection
     );
-    
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
