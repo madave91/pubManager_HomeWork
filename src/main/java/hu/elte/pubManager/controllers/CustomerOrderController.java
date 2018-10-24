@@ -46,7 +46,7 @@ public class CustomerOrderController {
     @Autowired
     private ProductRepository productRepository;
 //GETTERS
-    @ApiModelProperty(notes="Get the Orders")
+    @ApiModelProperty(notes="Get all the Orders")
     @GetMapping("/orders")
     public List<CustomerOrder> retriveAllOrder(){
         return customerOrderRepository.findAll();
@@ -90,6 +90,7 @@ public class CustomerOrderController {
         return ResponseEntity.created(location).build();
     }
   //POST THE ORDER DETAILS
+    @ApiModelProperty(notes="Add a new product to the order")
     @PostMapping("/orders/{id}/details")
     public ResponseEntity<Object> createDetails(@PathVariable Integer id, @RequestBody CustomerOrderProduct customerOrderProduct){
         Optional<CustomerOrder> orderOptional = customerOrderRepository.findById(id);
