@@ -23,9 +23,13 @@ A program indításakor egy beléptető rendszerrel találkozunk, ahol egy felha
 * Clone project:
 	* Terminálból: $ git clone https://github.com/madave91/pubManager_HomeWork.git
 	* Download gombbal
-* Indítás:
-	* Terminálból: $ mvn spring-boot:run	(a program gyökérkönyvtárából)
-	* Indítsd el a Start.bat file-t
+* Java Környezeti változó beállítása:
+	* Indítsd el a setup.bat file-t  
+* Indítás - Windows:
+	* Terminálból: $ mvnw spring-boot:run -Drun.arguments=--debug	(a program gyökérkönyvtárából)
+	* Indítsd el a start.bat file-t
+	
+* Indítás - 
 	
 Ezután az oldal megtekinthető a http://localhost:8080/ címen.
 	
@@ -33,4 +37,5 @@ Ezután az oldal megtekinthető a http://localhost:8080/ címen.
 	
 
 *Függvény leírások megtalálhatóak:*
-localhost:8080/swagger-ui.html
+
+http://localhost:8080/swagger-ui.html
