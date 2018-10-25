@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp target.pubManager-0.0.1-SNAPSHOT.jar target.classes.hu.elte.pubManager.PubManagerApplication;
+java -cp target/pubManager-0.0.1-SNAPSHOT.jar target.classes.hu.elte.pubManager.PubManagerApplication;
