@@ -3,14 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.pubManager.controllers;
+package hu.elte.pubManager.controllers.reservations;
 
-/**
- *
- * @author madave91
- */
-import hu.elte.pubManager.entities.Products;
+import hu.elte.pubManager.entities.Reservations.Reservations;
 import hu.elte.pubManager.exceptions.UserNotFoundException;
+import hu.elte.pubManager.repositories.reservations.ReservationRepository;
 import io.swagger.annotations.ApiModelProperty;
 import java.net.URI;
 import java.util.List;
@@ -22,59 +19,61 @@ import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import hu.elte.pubManager.repositories.ProductRepository;
-
+/**
+ *
+ * @author madave91
+ */
 @RestController
-public class ProductController {
-    
+public class ReservationController {
+        
     @Autowired
-    private ProductRepository productRepository;
+    private ReservationRepository reservationRepository;
    
 //GETTERS
     @ApiModelProperty(notes="Get All Product")
-    @GetMapping("/products")
-    public List<Products> retriveAllProduct(){
-        return productRepository.findAll();
+    @GetMapping("/reservations")
+    public List<Reservations> retriveAllReservations(){
+        return reservationRepository.findAll();
     }
     
     @ApiModelProperty(notes="Get Product By Id")
-    @GetMapping("/products/{id}")
-    public Resource<Products> retriveProduct(@PathVariable int id){
-        Optional<Products> product = productRepository.findById(id);
-        if(!product.isPresent()){
+    @GetMapping("/reservations/{id}")
+    public Resource<Reservations> retriveReservation(@PathVariable int id){
+        Optional<Reservations> reservation = reservationRepository.findById(id);
+        if(!reservation.isPresent()){
             throw new UserNotFoundException("id-"+id);
         }
-        Resource<Products> resource = new Resource<>(product.get());
-        ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retriveAllProduct());
-        resource.add(linkTo.withRel("all-products"));
+        Resource<Reservations> resource = new Resource<>(reservation.get());
+        ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retriveAllReservations());
+        resource.add(linkTo.withRel("all-reservations"));
         return resource;
     }
     
 //POSTERS
-    @ApiModelProperty(notes="Create a new Product")
-    @PostMapping("/products")
-    public ResponseEntity<Object> createProduct(@Valid @RequestBody Products product){
-        Products savedUser =  productRepository.save(product);
+    @ApiModelProperty(notes="Create a new Reservation")
+    @PostMapping("/reservations")
+    public ResponseEntity<Object> createReservation(@Valid @RequestBody Reservations reservation){
+        Reservations savedReservation =  reservationRepository.save(reservation);
        
        //send back the created user
         URI location = ServletUriComponentsBuilder
                .fromCurrentRequest()
                .path("/{id}")
-               .buildAndExpand(savedUser.getId())
+               .buildAndExpand(savedReservation.getReservationId())
                .toUri();
         return ResponseEntity.created(location).build();
     }
     
-    @ApiModelProperty(notes="Delete a Product By Id")
-    @DeleteMapping("/products/{id}")
+    @ApiModelProperty(notes="Delete a Reservation By Id")
+    @DeleteMapping("/reservations/{id}")
     public void deleteProduct(@PathVariable int id){
-        productRepository.deleteById(id);
+        reservationRepository.deleteById(id);
     }
 }

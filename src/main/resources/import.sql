@@ -34,12 +34,29 @@ insert into products (product_id, product_name, product_price, product_default_q
 insert into products (product_id, product_name, product_price, product_default_quantity, product_actual_quantity, product_type, product_details) values (24, 'Johnnie Walker Black Label', 700, 1.4, 1.4, 'shot','whiksy');
 insert into products (product_id, product_name, product_price, product_default_quantity, product_actual_quantity, product_type, product_details) values (25, 'Johnnie Walker Black Label', 700, 1.4, 1.4, 'shot','whiksy');
 
-insert into users (user_id, user_fname, user_lname, user_login_name, birth_date) values(1001, 'David', 'Madacsi', 'madave91', sysdate());
-insert into users (user_id, user_fname, user_lname, user_login_name, birth_date) values(2001, 'Ders', 'Horvath', 'ders', sysdate());
-insert into users (user_id, user_fname, user_lname, user_login_name, birth_date) values(3001, 'Domonkos', 'Nemeth', 'minkos', sysdate());
+insert into users (user_id, user_fname, user_lname, user_login_name, birth_date, email, phone_number) values(1, 'David', 'Madacsi', 'madave91', '1991-03-24', 'madave91@gmail.com', '+3307615902');
+insert into users (user_id, user_fname, user_lname, user_login_name, birth_date, email, phone_number) values(2, 'Ders', 'Horvath', 'ders', '1992-11-03', 'minkosful@gmail.com', '+3670124578');
+insert into users (user_id, user_fname, user_lname, user_login_name, birth_date, email, phone_number) values(3, 'Domonkos', 'Nemeth', 'minkos', '1993-09-22', 'ders@gmail.com', '+36302548474');
 
-insert into customer_order(order_id, order_date, paid, price) values (1001, sysdate(), false, 0)
-insert into customer_order(order_id, order_date, paid, price) values (1002, sysdate(), true, 0)
+insert into customer_order(order_id, order_date, paid, price) values (1, sysdate(), false, 0)
+insert into customer_order(order_id, order_date, paid, price) values (2, sysdate(), true, 0)
 
-insert into customer_order_product(comment, quantity, customer_order_order_id, product_product_id) values (6'citrommal', 3, 1001, 18)
-insert into customer_order_product(comment, quantity, customer_order_order_id, product_product_id) values ('', 3, 1001, 15)
+insert into customer_order_product(transaction_id, comment, quantity, customer_order_order_id, product_name) values (1, 'citrommal', 3, 1, 'Finlandia')
+insert into customer_order_product(transaction_id, comment, quantity, customer_order_order_id, product_name) values (2, '', 3, 1, 'Jameson')
+
+insert into tables(table_id, seat_number) values (1, 5)
+insert into tables(table_id, seat_number) values (2, 6)
+insert into tables(table_id, seat_number) values (3, 4)
+
+insert into reservations(reservation_id, table_table_id, reservation_name, reservation_date, from_time, until_time)values(1,1, 'Kis Lajos', '2019-01-22', PARSEDATETIME('16:30', 'HH:mm'), PARSEDATETIME('18:00', 'HH:mm'))
+insert into reservations(reservation_id, table_table_id, reservation_name, reservation_date, from_time, until_time)values(2,1, 'Hurrikán Hugó', '2019-01-22', PARSEDATETIME('17:30', 'HH:mm'), PARSEDATETIME('19:30', 'HH:mm'))
+insert into reservations(reservation_id, table_table_id, reservation_name, reservation_date, from_time, until_time)values(3,2, 'Dzsuvás Django','2019-02-23', PARSEDATETIME('16:30', 'HH:mm'), PARSEDATETIME('18:00', 'HH:mm'))
+insert into reservations(reservation_id, table_table_id, reservation_name, reservation_date, from_time, until_time)values(4,3, 'Huszár Herold', '2019-01-20', PARSEDATETIME('16:30', 'HH:mm'), PARSEDATETIME('18:00', 'HH:mm'))
+insert into reservations(reservation_id, table_table_id, reservation_name, reservation_date, from_time, until_time)values(5,1, 'Fiktív Ferenc', '2019-01-10', PARSEDATETIME('16:30', 'HH:mm'), PARSEDATETIME('18:00', 'HH:mm'))
+
+insert into work_schedule(schedule_id, user_user_id, work_date, from_time, until_time) values(1, 1, '2018-11-12', PARSEDATETIME('10:30', 'HH:mm'), PARSEDATETIME('18:00', 'HH:mm'))
+insert into work_schedule(schedule_id, user_user_id, work_date, from_time, until_time) values(2, 2, '2018-11-12', PARSEDATETIME('17:30', 'HH:mm'), PARSEDATETIME('04:00', 'HH:mm'))
+insert into work_schedule(schedule_id, user_user_id, work_date, from_time, until_time) values(3, 1, '2018-11-13', PARSEDATETIME('10:30', 'HH:mm'), PARSEDATETIME('18:00', 'HH:mm'))
+
+
+

@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.pubManager.repositories;
+package hu.elte.pubManager.repositories.users;
 
-import hu.elte.pubManager.entities.CustomerOrder;
+import hu.elte.pubManager.entities.Users.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author madave91
  */
-@ResponseBody
-public interface CustomerOrderRepository extends JpaRepository<CustomerOrder, Integer>{
+@Repository
+public interface UserRepository extends JpaRepository<Users, Integer>{
+    
 }

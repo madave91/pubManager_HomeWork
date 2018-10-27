@@ -29,7 +29,8 @@ A program indításakor egy beléptető rendszerrel találkozunk, ahol egy felha
 	* Terminálból: $ mvnw spring-boot:run -Drun.arguments=--debug	(a program gyökérkönyvtárából)
 	* Indítsd el a start.bat file-t
 	
-* Indítás - 
+* Indítás - Linux:
+*Hamarosan!*
 	
 Ezután az oldal megtekinthető a http://localhost:8080/ címen.
 	

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.pubManager.repositories;
+package hu.elte.pubManager.repositories.users;
 
-import hu.elte.pubManager.entities.CustomerOrderProduct;
+import hu.elte.pubManager.entities.Users.WorkSchedule;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,5 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author madave91
  */
 @ResponseBody
-public interface CustomerOrderProductRepository extends JpaRepository<CustomerOrderProduct, Integer>{
+public interface WorkScheduleRepository extends JpaRepository<WorkSchedule, Integer> {
+         
 }
+

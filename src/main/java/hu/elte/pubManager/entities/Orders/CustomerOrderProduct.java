@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.pubManager.entities;
+package hu.elte.pubManager.entities.Orders;
 
+import hu.elte.pubManager.entities.Orders.CustomerOrder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import hu.elte.pubManager.exceptions.UserNotFoundException;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,6 +28,8 @@ import javax.persistence.Table;
 @Table(name = "customer_order_product")
 public class CustomerOrderProduct {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "transaction_id", updatable = false, nullable = true)
     private Integer id;
     
     @ManyToOne(fetch=FetchType.LAZY)
@@ -37,19 +41,25 @@ public class CustomerOrderProduct {
     @JsonIgnore
     private Products products;
     
+    @Column(name="product_name", nullable=false, length=255)
     private String productName;
     
-    // @Column(name="quantity", nullable=false, length=3)
+    @Column(name="quantity", nullable=false, length=3)
     private int quantity;
-    //@Column(name="comment", nullable=false, length=3)
+    @Column(name="comment", nullable=true, length=255)
     private String comment;
 
     public CustomerOrderProduct() {
     }
 
     //Constructor for webPost
-    public CustomerOrderProduct(Products product, int quantity, String comment) {
-        this.products = product;
+    public CustomerOrderProduct(String productName, int quantity, String comment) {
+        try{
+            this.products = Products.getProductByName(productName);
+        }catch(NullPointerException e)
+        {
+            throw new UserNotFoundException("There is no product with this name!");
+        }
         this.quantity = quantity;
         this.comment = comment;
     }

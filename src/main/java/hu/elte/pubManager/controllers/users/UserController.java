@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.pubManager.controllers;
+package hu.elte.pubManager.controllers.users;
 
-import hu.elte.pubManager.entities.Users;
+import hu.elte.pubManager.entities.Users.Users;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import hu.elte.pubManager.exceptions.UserNotFoundException;
-import hu.elte.pubManager.repositories.UserRepository;
+import hu.elte.pubManager.repositories.users.UserRepository;
 import io.swagger.annotations.ApiModelProperty;
 import java.net.URI;
 import java.util.List;
@@ -67,7 +67,7 @@ public class UserController {
         URI location = ServletUriComponentsBuilder
                .fromCurrentRequest()
                .path("/{id}")
-               .buildAndExpand(savedUser.getId())
+               .buildAndExpand(savedUser.getUserId())
                .toUri();
         return ResponseEntity.created(location).build();
     }

@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.pubManager.controllers;
+package hu.elte.pubManager.controllers.orders;
 
-import hu.elte.pubManager.entities.CustomerOrder;
-import hu.elte.pubManager.entities.CustomerOrderProduct;
-import hu.elte.pubManager.entities.Products;
+import hu.elte.pubManager.entities.Orders.CustomerOrder;
+import hu.elte.pubManager.entities.Orders.CustomerOrderProduct;
+import hu.elte.pubManager.entities.Orders.Products;
 import hu.elte.pubManager.exceptions.UserNotFoundException;
-import hu.elte.pubManager.repositories.CustomerOrderProductRepository;
-import hu.elte.pubManager.repositories.CustomerOrderRepository;
-import hu.elte.pubManager.repositories.ProductRepository;
+import hu.elte.pubManager.repositories.orders.CustomerOrderProductRepository;
+import hu.elte.pubManager.repositories.orders.CustomerOrderRepository;
+import hu.elte.pubManager.repositories.orders.ProductRepository;
 import io.swagger.annotations.ApiModelProperty;
 import java.net.URI;
 import java.util.List;

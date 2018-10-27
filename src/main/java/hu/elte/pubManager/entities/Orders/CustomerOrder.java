@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.pubManager.entities;
+package hu.elte.pubManager.entities.Orders;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -43,6 +43,7 @@ public class CustomerOrder {
     @Column(name="order_date", nullable=false, length=11)
     @ApiModelProperty(notes="")
     private Date orderDate;
+    
 
     protected CustomerOrder() {
     }
