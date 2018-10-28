@@ -25,6 +25,9 @@ A program indításakor egy beléptető rendszerrel találkozunk, ahol egy felha
 ### Adatbázis terv:
 ![Database diagram](docs/images/Database_UML.png)
 
+### Felhasználói felület tervek:
+![UX diagram(docs/images/UX.png)
+
 ### Letöltés és Indítás:
 * Clone project:
 	* Terminálból: $ git clone https://github.com/madave91/pubManager_HomeWork.git
