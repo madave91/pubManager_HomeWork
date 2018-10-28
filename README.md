@@ -15,9 +15,15 @@ A program indításakor egy beléptető rendszerrel találkozunk, ahol egy felha
 * Reservations: Itt az addig beérkezett foglalásokat találjuk, id-val, névvel, asztallal, időponttal ellátva. Lehetőségünk van új foglalás felvételére, törlésére, módosítására, aszerint, hogy van-e a kívánt időpontra szabad asztal. 
 * Work Schedule: Ez a felület a Pultosok számára csak olvasható formában jelenik meg, de jelezhetik jövőbeli ráérésük állapotát. Az Admin és a Manager beoszthatja az alkalmazottakat. 
 * Settings: Itt van lehetőség jogkör módosításra (csak Admin), felhasználónév - jelszó módosításra, hibabejelentésre.
-	
+
+### Használati eset diagram:	
 ![Use-Case diagram](docs/images/PubManager_USECASE.png)
 
+### Állapot diagram:
+![Process diagram](docs/images/Process_UML.png)
+
+### Adatbázis terv:
+![Database diagram](docs/images/Database_UML.png)
 
 ### Letöltés és Indítás:
 * Clone project:
