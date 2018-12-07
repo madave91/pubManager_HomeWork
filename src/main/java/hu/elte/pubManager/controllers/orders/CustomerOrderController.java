@@ -125,7 +125,18 @@ public class CustomerOrderController {
     
     @ApiModelProperty(notes="Delete Order By ID")
     @DeleteMapping("/orders/{id}")
-    public void deleteUser(@PathVariable int id){
+    public void deleteOrder(@PathVariable int id){
         customerOrderRepository.deleteById(id);
+    }
+    @ApiModelProperty(notes="Delete Detail By ID")
+    @DeleteMapping("/orders/{id}/details/{detailId}")
+    public void deleteOrderDetail(@PathVariable int id, @PathVariable int detailId){
+        Optional<CustomerOrder> orderOptional = customerOrderRepository.findById(id);
+        if(!orderOptional.isPresent()){
+            throw new UserNotFoundException("id-" + id);
+        }
+        CustomerOrder order = orderOptional.get();      
+        order.getCustomerOrderProducts().remove(detailId-1);
+        customerOrderProductRepository.deleteById(detailId);
     }   
 }
