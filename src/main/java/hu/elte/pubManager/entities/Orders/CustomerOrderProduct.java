@@ -44,6 +44,12 @@ public class CustomerOrderProduct {
     @Column(name="product_name", nullable=false, length=255)
     private String productName;
     
+    @Column(name="price", nullable=false)
+    private Integer price;
+    
+    @Column(name="sum")
+    private Integer sum;
+    
     @Column(name="quantity", nullable=false, length=3)
     private int quantity;
     @Column(name="comment", nullable=true, length=255)
@@ -53,14 +59,16 @@ public class CustomerOrderProduct {
     }
 
     //Constructor for webPost
-    public CustomerOrderProduct(String productName, int quantity, String comment) {
+    public CustomerOrderProduct(String productName,int price, int quantity, String comment) {
         try{
             this.products = Products.getProductByName(productName);
         }catch(NullPointerException e)
         {
             throw new UserNotFoundException("There is no product with this name!");
         }
+        this.price = price;
         this.quantity = quantity;
+        this.sum = quantity * price;
         this.comment = comment;
     }
     //constructor for sql command
@@ -100,6 +108,14 @@ public class CustomerOrderProduct {
         return comment;
     }
 
+    public Integer getSum() {
+        return sum;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
     //SETTERS
 
     public void setId(Integer id) {
@@ -125,6 +141,14 @@ public class CustomerOrderProduct {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public void setSum(Integer sum) {
+        this.sum = sum;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     @Override

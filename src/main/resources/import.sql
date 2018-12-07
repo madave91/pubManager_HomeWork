@@ -41,8 +41,8 @@ insert into users (user_id, user_fname, user_lname, user_login_name, birth_date,
 insert into customer_order(order_id, order_date, paid, price) values (1, sysdate(), false, 0)
 insert into customer_order(order_id, order_date, paid, price) values (2, sysdate(), true, 0)
 
-insert into customer_order_product(transaction_id, comment, quantity, customer_order_order_id, product_name) values (1, 'citrommal', 3, 1, 'Finlandia')
-insert into customer_order_product(transaction_id, comment, quantity, customer_order_order_id, product_name) values (2, '', 3, 1, 'Jameson')
+insert into customer_order_product(transaction_id, comment, price, quantity, customer_order_order_id, product_name) values (1, 'citrommal', 550, 3, 1, 'Finlandia')
+insert into customer_order_product(transaction_id, comment, price, quantity, customer_order_order_id, product_name) values (2, '', 600, 3, 1, 'Jameson')
 
 insert into tables(table_id, seat_number) values (1, 5)
 insert into tables(table_id, seat_number) values (2, 6)
