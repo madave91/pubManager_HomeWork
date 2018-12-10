@@ -25,12 +25,9 @@ import javax.persistence.Table;
 @Table(name = "customer_order")
 public class CustomerOrder {
     @Id
-    @Column(name = "order_id", updatable = false, nullable = false)
     @GeneratedValue
+    @Column(name = "order_id", updatable = false, nullable = false)
     private Integer orderID;
-    
-    @OneToMany(mappedBy="customerOrder")
-    private List<CustomerOrderProduct> customerOrderProducts;
     
     @Column(name="price", nullable=false, length=10)
     @ApiModelProperty(notes="Price is in Hungarian Forint")
@@ -43,6 +40,9 @@ public class CustomerOrder {
     @Column(name="order_date", nullable=false, length=11)
     @ApiModelProperty(notes="")
     private Date orderDate;
+    
+    @OneToMany(mappedBy="customerOrder")
+    private List<CustomerOrderProduct> customerOrderProducts;
     
 
     protected CustomerOrder() {
@@ -95,9 +95,7 @@ public class CustomerOrder {
     public void setPrice(int price) {
         this.price = price;
     }
-    
-    
-        
+
     public void calculatePrice(int multiplier, int price){
         this.price += (multiplier*price);
     }

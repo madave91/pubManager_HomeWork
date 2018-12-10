@@ -126,6 +126,7 @@ public class CustomerOrderController {
     @ApiModelProperty(notes="Delete Order By ID")
     @DeleteMapping("/orders/{id}")
     public void deleteOrder(@PathVariable int id){
+        deleteAllOrderDetails(id);
         customerOrderRepository.deleteById(id);
     }
     @ApiModelProperty(notes="Delete Detail By ID")
@@ -138,5 +139,12 @@ public class CustomerOrderController {
         CustomerOrder order = orderOptional.get();      
         order.getCustomerOrderProducts().remove(detailId-1);
         customerOrderProductRepository.deleteById(detailId);
-    }   
+    }
+    
+    public void deleteAllOrderDetails(int id){
+        Optional<CustomerOrder> orderOptional = customerOrderRepository.findById(id);
+        CustomerOrder order = orderOptional.get();      
+        order.getCustomerOrderProducts().clear();
+        customerOrderProductRepository.deleteByCustomerOrder(order);
+    }
 }
