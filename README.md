@@ -43,7 +43,8 @@ A program indításakor egy beléptető rendszerrel találkozunk, ahol egy felha
 	
 Ezután az oldal megtekinthető a http://localhost:8080/ címen.
 	
-
+* Front-End:
+https://github.com/madave91/pubManager_FrontEnd
 	
 
 *Függvény leírások megtalálhatóak:*
